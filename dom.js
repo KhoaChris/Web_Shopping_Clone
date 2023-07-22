@@ -1,3 +1,4 @@
+import data from "./list.json" assert { type: "json" };
 let container = document.getElementById("container");
 let body = document.body;
 
@@ -10,7 +11,6 @@ function buildNavbar() {
   navbar.style.outlineColor = "rgb(20, 47, 67)";
   navbar.style.boxShadow = "rgba(0, 0, 0, 0.15) 0px 1px 4px 0px";
   navbar.style.display = "block";
-
 
   let containerNav = document.createElement("div");
   containerNav.style.boxSizing = "border-box";
@@ -45,7 +45,7 @@ function buildNavbar() {
   optioncontainerNav.style.backgroundColor = "white";
   optioncontainerNav.style.justifyContent = "space-between";
   optioncontainerNav.style.alignItems = "center";
-  optioncontainerNav.style.width = "480px";
+  optioncontainerNav.style.width = "500px";
   optioncontainerNav.style.height = "inherit";
   optioncontainerNav.style.paddingTop = "40px";
   optioncontainerNav.style.textAlign = "left";
@@ -177,6 +177,8 @@ function buildNavbar() {
   lowerCart.style.height = "45px";
   lowerCart.style.marginRight = "10px";
   lowerCart.style.paddingBottom = "6px";
+  
+  lowerCart.addEventListener("click", tinhTien);
 
   lowercontainerNav.appendChild(lowerCart);
 
@@ -210,7 +212,6 @@ function buildMainContainer() {
   mainBox.style.textAlign = "left";
   mainBox.style.height = "100%";
   mainBox.style.paddingTop = "100px";
-  mainBox.style.position = "";
 
   //build main frame for menu items
   let mainFrame = document.createElement("div");
@@ -250,34 +251,6 @@ function buildMainContainer() {
   swipeWrapper.style.boxSizing = "content-box";
 
   swipeMenuList.appendChild(swipeWrapper);
-
-  //build bestseller div
-  // let pack = document.createElement("div");
-  // pack.style.width = "96px";
-  // pack.style.height = "125px";
-  // pack.style.marginRight = "20px";
-
-  // swipeWrapper.appendChild(pack);
-
-  // let packImage = document.createElement("img");
-  // packImage.src = "Pack.jpg";
-  // packImage.style.width = "96px";
-  // packImage.style.height = "94px";
-  // packImage.style.borderRadius = "15px";
-
-  // pack.appendChild(packImage);
-
-  // let packText = document.createElement("span");
-  // packText.style.color = "#142f43";
-  // packText.style.display = "block";
-  // packText.style.fontSize = "15px";
-  // packText.style.fontFamily = "Roboto, Arial, sans-serif";
-  // packText.style.fontWeight = "bold";
-  // packText.style.textAlign = "center";
-  // packText.textContent = "Bestseller";
-  // packText.style.paddingTop = "5px";
-
-  // pack.appendChild(packText);
 
   //build on-sale div
   let sale = document.createElement("div");
@@ -537,53 +510,101 @@ function buildMainContainer() {
 
   chicken.appendChild(chickenText);
 
-  //build Burgur div
-  let burgur = document.createElement("div");
-  burgur.style.width = "96px";
-  burgur.style.height = "125px";
-  burgur.style.marginRight = "20px";
+  //build burgerBar div
+  let burgerBar = document.createElement("div");
+  burgerBar.style.width = "96px";
+  burgerBar.style.height = "125px";
+  burgerBar.style.marginRight = "20px";
 
-  swipeWrapper.appendChild(burgur);
+  swipeWrapper.appendChild(burgerBar);
 
-  let burgurImage = document.createElement("img");
-  burgurImage.src =
+  let burgerBarImage = document.createElement("img");
+  burgerBarImage.src =
     "https://cdn.lotteria.vn/media/catalog/tmp/category/BG_New-02_6.jpg";
-  burgurImage.style.width = "96px";
-  burgurImage.style.height = "94px";
-  burgurImage.style.borderRadius = "15px";
-  burgurImage.style.border = "3px solid red";
+  burgerBarImage.style.width = "96px";
+  burgerBarImage.style.height = "94px";
+  burgerBarImage.style.borderRadius = "15px";
+  burgerBarImage.style.border = "3px solid red";
 
-  burgur.appendChild(burgurImage);
-  let burgurText = document.createElement("span");
-  burgurText.style.color = "#142f43";
-  burgurText.style.display = "block";
-  burgurText.style.fontSize = "15px";
-  burgurText.style.fontFamily = "Roboto, Arial, sans-serif";
-  burgurText.style.fontWeight = "bold";
-  burgurText.style.textAlign = "center";
-  burgurText.textContent = "Burger";
-  burgurText.style.paddingTop = "5px";
-  burgurText.style.color = "red";
+  burgerBar.appendChild(burgerBarImage);
+  
+  let burgerBarText = document.createElement("span");
+  burgerBarText.style.color = "#142f43";
+  burgerBarText.style.display = "block";
+  burgerBarText.style.fontSize = "15px";
+  burgerBarText.style.fontFamily = "Roboto, Arial, sans-serif";
+  burgerBarText.style.fontWeight = "bold";
+  burgerBarText.style.textAlign = "center";
+  burgerBarText.textContent = "Burger";
+  burgerBarText.style.paddingTop = "5px";
+  burgerBarText.style.color = "red";
 
-  burgur.appendChild(burgurText);
+  burgerBar.appendChild(burgerBarText);
 
   return cateMenuList;
 }
 
-function BuildItemCard(name, price, image) {
+class Burger {
+  /**
+   * @param {String} id
+   * @param {number} stock
+   * @param {string} name
+   * @param {string} price
+   * @param {string} image
+   *
+   */
+  constructor(id, stock, name, price, image) {
+    this.id = id;
+    this.stock = stock;
+    this.name = name;
+    this.price = price;
+    this.image = image;
+  }
+}
+
+/**
+ *
+ * @param {Burger} burger
+ * @returns
+ */
+function BuildItemCard(burger) {
   let ItemCard = document.createElement("div");
   Object.assign(ItemCard.style, {
     "font-family": "Roboto, Arial, sans-serif",
-    "max-width": "280px",
+    "max-width": "250px",
     "font-size": "16px",
+    borderRadius: "10px",
     margin: "0px 5px 10px",
+    padding: "10px",
+    "background-color": "white",
+    height: "350px",
+    "outline-color": "rgb(20,47,67)",
+    "box-shadow": "rgba(0, 0, 0, 0.15) 1px 2px 5px 0px",
   });
 
-  ItemCard.innerHTML = `<img src="${image}" style="width: 100%; border-radius: 10px; height: 280px; object-fit: cover; box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2), 0 -2px 20px 0 rgba(0, 0, 0, 0.19);">
-  <div style="margin-top: 5px;">
-  <h4 style="margin-bottom: 4px;">${name}</h4>
-  <p style="margin-top: 5px">${price}</p>
+  ItemCard.innerHTML = `<img src="${burger.image}" style="height: 180px; object-fit: cover;">
+  <div>
+  <h4 style="margin-bottom: 4px;">${burger.name} </h4>
+  <p style="margin-top: 5px; color: #ff5b6a; font-size: 30px; font-weight: bold"]">${burger.price} đ</p>
   </div>`;
+
+  let button = document.createElement("button");
+  button.innerText = "Thêm vào giỏ hàng";
+  button.style.width = "100%";
+  button.style.height = "50px";
+  button.style.borderRadius = "10px";
+  button.style.border = "none";
+  button.style.backgroundColor = "#ff5b6a";
+  button.style.color = "white";
+  button.style.marginTop = "5px";
+  button.style.fontSize = "18px";
+  button.style.fontWeight = "600";
+  button.addEventListener("click", () => {
+    addToCart(burger);
+  });
+  ItemCard.appendChild(button);
+  container.appendChild(ItemCard);
+
   return ItemCard;
 }
 
@@ -598,55 +619,60 @@ ContainerCard.style.padding = "0px 100px 0px 100px";
 ContainerCard.style.width = "70%";
 ContainerCard.style.height = "80%";
 
-let NewCardBurgurLChicken = BuildItemCard(
-  "BURGER LCHICKEN",
-  "48.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0047-online_2.png"
-);
-let NewCardBeefBurgur = BuildItemCard(
-  "BURGUR BÒ",
-  "32.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0046-online_3.png"
-);
-let NewCardDoubleBurgur = BuildItemCard(
-  "BURGUR DOUBLE DOUBLE",
-  "69.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0042-online_3.png"
-);
-let NewCardShrimp = BuildItemCard(
-  "BURGUR TÔM",
-  "47.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0007-online_3.png"
-);
-let NewCardBulgogi = BuildItemCard(
-  "Burgur Bulgogi",
-  "45.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0004-online_3.png"
-);
-let NewCardFish = BuildItemCard(
-  "Burgur Cá",
-  "39.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0009-online_3.png"
-);
-let NewCardCheese = BuildItemCard(
-  "Burgur Phô Mai",
-  "42.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0002-online_3.png"
-);
-let NewCardTeriyaki = BuildItemCard(
-  "Burgur Bò Teriyaki",
-  "42.000 đ",
-  "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/2/1/217675-online_3.png"
-);
-
-listCard.appendChild(NewCardBurgurLChicken);
-listCard.appendChild(NewCardBeefBurgur);
-listCard.appendChild(NewCardDoubleBurgur);
-listCard.appendChild(NewCardShrimp);
-listCard.appendChild(NewCardBulgogi);
-listCard.appendChild(NewCardFish);
-listCard.appendChild(NewCardCheese);
-listCard.appendChild(NewCardTeriyaki);
+for (let i = 0; i < data.Burgers.length; i++) {
+  let burger = data.Burgers[i];
+  let newItem = BuildItemCard(burger);
+  listCard.appendChild(newItem);
+  console.log(newItem);
+}
 
 ContainerCard.appendChild(listCard);
 bodyContent.appendChild(ContainerCard);
+
+/** @type {Burger[]} */
+let shoppingList = [];
+
+/**
+ *
+ * @param {Burger} burger
+ */
+function addToCart(burger) {
+  let index = shoppingList.findIndex((item) => {
+    return item.id == burger.id;
+  });
+  if (index != -1) {
+    shoppingList[index].quantity++;
+    console.log(shoppingList);
+    alert("Bạn vừa thêm thành công sản phẩm " + burger.name);
+    return;
+  }
+  shoppingList.push({
+    id: burger.id,
+    quantity: 1
+  });
+  alert("Bạn vừa thêm thành công sản phẩm " + burger.name);
+  console.log(shoppingList);
+  return;
+}
+
+let chargeButton = document.createElement("button");
+chargeButton.innerHTML = "Thanh toán";
+chargeButton.addEventListener("click", () => {
+    tinhTien();
+})
+
+function tinhTien(){
+  if(shoppingList.length == 0){
+      alert("Chưa có món ăn nào trong giỏ hàng");
+  }
+  let total = 0;
+  shoppingList.forEach((item) => {
+      data.Burgers.forEach((food) => {
+          if(food.id == item.id){
+              total += food.price * item.quantity;
+          }
+      })
+  })
+  alert("Tổng tiền là: " + total);
+  shoppingList = [];
+}

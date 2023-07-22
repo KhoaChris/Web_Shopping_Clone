@@ -1,0 +1,60 @@
+{
+    "Burgers":[
+        {
+            "id":"B1",
+            "stock": 5,
+            "name": "Burger LChicken",
+            "price": 48000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0047-online_2.png"
+        },
+        {
+            "id": "B2",
+            "stock": 3,
+            "name": "Burger Bò",
+            "price": 32000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0046-online_3.png"
+        },
+        {
+            "id": "B3",
+            "stock": 5,
+            "name": "Burger Double Double",
+            "price": 69000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0042-online_3.png"
+        },
+        {
+            "id": "B4",
+            "stock": 3,
+            "name": "Burger Tôm",
+            "price": 47000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0007-online_3.png"
+        },
+        {
+            "id": "B5",
+            "stock": 5,
+            "name": "Burger Bulgogi",
+            "price": 45000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0004-online_3.png"
+        },
+        {
+            "id": "B6",
+            "stock": 3,
+            "name": "Burger Cá",
+            "price": 39000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0009-online_3.png"
+        },
+        {
+            "id": "B7",
+            "stock": 5,
+            "name": "Burger Phô Mai",
+            "price": 42000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/l/b/lb0002-online_3.png"
+        },
+        {
+            "id": "B8",
+            "stock": 3,
+            "name": "Burger Bò Teriyaki",
+            "price": 42000,
+            "image": "https://cdn.lotteria.vn/media/catalog/product/cache/584039753b87a8d227764e04fc461e3e/2/1/217675-online_3.png"
+        }
+    ]
+}
