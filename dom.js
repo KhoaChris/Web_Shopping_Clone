@@ -114,7 +114,7 @@ function buildNavbar() {
   uppercontainerNav.style.paddingTop = "3px";
 
   let upperLanguages = document.createElement("img");
-  upperLanguages.src = "Language.png";
+  upperLanguages.src = "image/Language.png";
   upperLanguages.style.width = "120px";
   upperLanguages.style.height = "28px";
   upperLanguages.style.marginRight = "10px";
@@ -123,7 +123,7 @@ function buildNavbar() {
   uppercontainerNav.appendChild(upperLanguages);
 
   let upperDownload = document.createElement("img");
-  upperDownload.src = "Download.png";
+  upperDownload.src = "image/Download.png";
   upperDownload.style.width = "120px";
   upperDownload.style.height = "28px";
   upperLanguages.style.marginRight = "10px";
@@ -145,7 +145,7 @@ function buildNavbar() {
   lowercontainerNav.style.marginRight = "10px";
 
   let lowerLocation = document.createElement("img");
-  lowerLocation.src = "LocationLogo.png";
+  lowerLocation.src = "image/LocationLogo.png";
   lowerLocation.style.width = "50px";
   lowerLocation.style.height = "45px";
   lowerLocation.style.marginRight = "20px";
@@ -154,7 +154,7 @@ function buildNavbar() {
   lowercontainerNav.appendChild(lowerLocation);
 
   let lowerUser = document.createElement("img");
-  lowerUser.src = "UserLogo.png";
+  lowerUser.src = "image/UserLogo.png";
   lowerUser.style.width = "50px";
   lowerUser.style.height = "45px";
   lowerUser.style.marginRight = "10px";
@@ -163,7 +163,7 @@ function buildNavbar() {
   lowercontainerNav.appendChild(lowerUser);
 
   let lowerNotification = document.createElement("img");
-  lowerNotification.src = "NotiLogo.png";
+  lowerNotification.src = "image/NotiLogo.png";
   lowerNotification.style.width = "50px";
   lowerNotification.style.height = "45px";
   lowerNotification.style.marginRight = "20px";
@@ -172,7 +172,7 @@ function buildNavbar() {
   lowercontainerNav.appendChild(lowerNotification);
 
   let lowerCart = document.createElement("img");
-  lowerCart.src = "CartLogo.png";
+  lowerCart.src = "image/CartLogo.png";
   lowerCart.style.width = "50px";
   lowerCart.style.height = "45px";
   lowerCart.style.marginRight = "10px";
@@ -261,7 +261,7 @@ function buildMainContainer() {
   swipeWrapper.appendChild(sale);
 
   let saleImage = document.createElement("img");
-  saleImage.src = "Promotion-01_1.jpg";
+  saleImage.src = "image/Promotion-01_1.jpg";
   saleImage.style.width = "96px";
   saleImage.style.height = "94px";
   saleImage.style.borderRadius = "15px";
@@ -665,6 +665,7 @@ function tinhTien(){
   if(shoppingList.length == 0){
       alert("Chưa có món ăn nào trong giỏ hàng");
   }
+  else{
   let total = 0;
   shoppingList.forEach((item) => {
       data.Burgers.forEach((food) => {
@@ -673,6 +674,7 @@ function tinhTien(){
           }
       })
   })
-  alert("Tổng tiền là: " + total);
-  shoppingList = [];
+    alert("Tổng tiền là: " + total);
+    shoppingList = [];
+  } 
 }
