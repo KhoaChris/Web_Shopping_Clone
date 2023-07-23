@@ -18,8 +18,6 @@ function openDialog() {
   dialogBox.style.top = "40%";
   dialogBox.style.border = "3px solid #ff5b6a";
   dialogBox.style.boxShadow = "rgba(0, 0, 0, 0.15) 1px 2px 5px 0px";
-  dialogBox.style.opacity = "1";
-  dialogBox.style.visibility = "visible";
 }
 
 function closeDialog() {
@@ -717,14 +715,14 @@ let shoppingList = [];
  * @param {Burger} burger
  */
 function addToCart(burger) {
-  let pic = document.createElement("img");
-  pic.src = burger.image;
-  pic.style.width = "40px";
-  pic.style.height = "40px";
-  let itemCartName = document.createElement("p");
-  itemCartName.innerHTML = item.name;
-  let itemCartPrice = document.createElement("p");
-  itemCartPrice.innerHTML = item.price;
+  // let pic = document.createElement("img");
+  // pic.src = burger.image;
+  // pic.style.width = "40px";
+  // pic.style.height = "40px";
+  // let itemCartName = document.createElement("p");
+  // itemCartName.innerHTML = item.name;
+  // let itemCartPrice = document.createElement("p");
+  // itemCartPrice.innerHTML = item.price;
   
   let index = shoppingList.findIndex((item) => {
     return item.id == burger.id;
@@ -732,14 +730,16 @@ function addToCart(burger) {
   if (index != -1) {
     shoppingList[index].quantity++;
     console.log(shoppingList);
-    alert("Bạn vừa thêm thành công sản phẩm " + burger.name);
     return;
   }
   shoppingList.push({
     id: burger.id,
     quantity: 1,
   });
-  alert("Bạn vừa thêm thành công sản phẩm " + burger.name);
+  alert("Bạn vừa thêm thành công sản phẩm " + burger.name + " vào giỏ hàng hiện tại");
+  // payList.appendChild(pic);
+  // payList.appendChild(itemCartName);
+  // payList.appendChild(itemCartPrice);
   console.log(shoppingList);
   payList.return;
 }
@@ -756,8 +756,8 @@ function tinhTien() {
         }
       });
     });
-    alert("Bạn đã thành công thanh toán đơn hàng");
     alert("Tổng tiền là: " + total);
+    alert("Bạn đã thành công thanh toán đơn hàng");
     shoppingList = [];
   }
 }
