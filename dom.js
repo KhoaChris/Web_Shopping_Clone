@@ -4,7 +4,7 @@ container.style = "width : 100%; height : 100%;";
 let body = document.body;
 
 let dialogBox = document.createElement("dialog");
-dialogBox.innerHTML = ``;
+dialogBox.innerHTML = `GIỎ HÀNG CỦA BẠN`;
 function openDialog() {
   dialogBox.setAttribute("open", "open");
   dialogBox.show();
@@ -15,7 +15,7 @@ function openDialog() {
   dialogBox.style.borderRadius = "10px";
   dialogBox.style.position = "fixed";
   dialogBox.style.top = "38%";
-  dialogBox.style.border = "3px solid #ff5b6a";
+  dialogBox.style.border = "3px solid #666666";
   dialogBox.style.boxShadow = "rgba(0, 0, 0, 0.15) 1px 2px 5px 0px";
   
 }
@@ -67,14 +67,33 @@ let chargeButton = document.createElement("button");
 chargeButton.innerHTML = "Thanh toán";
 chargeButton.style.width = " 200px";
 chargeButton.style.height = "40px";
-chargeButton.style.backgroundColor = "#ff5b6a";
-chargeButton.style.color = "white";
+chargeButton.style.backgroundColor = "#00FF00";
+chargeButton.style.color = "black";
 chargeButton.style.borderRadius = "5px";
 chargeButton.style.display = "block";
 chargeButton.style.float = "right";
 chargeButton.style.justifyContent = "bottom";
 chargeButton.style.fontSize = "20px";
 chargeButton.style.border = "none";
+
+chargeButton.addEventListener(
+  "mouseenter",
+  (e) => {
+    chargeButton.style.color = "black";
+    chargeButton.style.backgroundColor = "#00CC00";
+  },
+  false
+);
+
+chargeButton.addEventListener(
+  "mouseleave",
+  (e) => {
+    chargeButton.style.color = "black";
+    chargeButton.style.backgroundColor = "#00FF00";
+  },
+  false
+);
+
 chargeButton.addEventListener("click", () => {
   tinhTien();
 });
@@ -95,6 +114,24 @@ deleteButton.style.marginRight = "20px";
 deleteButton.style.justifyContent = "bottom";
 deleteButton.style.fontSize = "20px";
 deleteButton.style.border = "none";
+
+deleteButton.addEventListener(
+  "mouseenter",
+  (e) => {
+    deleteButton.style.color = "white";
+    deleteButton.style.backgroundColor = "#990000";
+  },
+  false
+);
+
+deleteButton.addEventListener(
+  "mouseleave",
+  (e) => {
+    deleteButton.style.color = "white";
+    deleteButton.style.backgroundColor = "#ff5b6a";
+  },
+  false
+);
 
 deleteButton.addEventListener("click", () => {
   dialogContent.innerHTML = "";
@@ -705,6 +742,25 @@ function BuildItemCard(burger) {
   button.style.marginTop = "5px";
   button.style.fontSize = "18px";
   button.style.fontWeight = "600";
+
+  button.addEventListener(
+    "mouseenter",
+    (e) => {
+      button.style.color = "white";
+      button.style.backgroundColor = "#990000";
+    },
+    false
+  );
+
+  button.addEventListener(
+    "mouseleave",
+    (e) => {
+      button.style.color = "white";
+      button.style.backgroundColor = "#ff5b6a";
+    },
+    false
+  );
+
   button.addEventListener("click", () => {
     addToCart(burger);
   });
