@@ -4,21 +4,20 @@ container.style = "width : 100%; height : 100%;";
 let body = document.body;
 
 let dialogBox = document.createElement("dialog");
-dialogBox.innerHTML = `GIỎ HÀNG (YOUR ODER LIST)`;
+dialogBox.innerHTML = ``;
 function openDialog() {
   dialogBox.setAttribute("open", "open");
   dialogBox.show();
-  dialogBox.style.width = "700px";
+  dialogBox.style.width = "60%";
   dialogBox.style.height = "300px";
   dialogBox.style.fontWeight = 400;
   dialogBox.style.fontSize = "22px";
   dialogBox.style.borderRadius = "10px";
   dialogBox.style.position = "fixed";
-  dialogBox.style.top = "40%";
+  dialogBox.style.top = "38%";
   dialogBox.style.border = "3px solid #ff5b6a";
   dialogBox.style.boxShadow = "rgba(0, 0, 0, 0.15) 1px 2px 5px 0px";
-
-  container.blur = "auto";
+  
 }
 
 function closeDialog() {
@@ -59,11 +58,13 @@ dialogContent.style.backgroundColor = "white";
 dialogContent.style.justifyContent = "left";
 dialogContent.style.columnGap = "10px";
 dialogContent.style.display = "flex";
+dialogContent.style.alignItems = "top";
+dialogContent.style.padding = "10px";
 
 dialogBox.appendChild(dialogContent);
 
 let chargeButton = document.createElement("button");
-chargeButton.innerHTML = "Thanh Toán";
+chargeButton.innerHTML = "Thanh toán";
 chargeButton.style.width = " 200px";
 chargeButton.style.height = "40px";
 chargeButton.style.backgroundColor = "#ff5b6a";
@@ -73,11 +74,35 @@ chargeButton.style.display = "block";
 chargeButton.style.float = "right";
 chargeButton.style.justifyContent = "bottom";
 chargeButton.style.fontSize = "20px";
+chargeButton.style.border = "none";
 chargeButton.addEventListener("click", () => {
   tinhTien();
 });
 
 dialogBox.appendChild(chargeButton);
+
+//deleteButton
+let deleteButton = document.createElement("button");
+deleteButton.innerHTML = "Xóa đơn hàng";
+deleteButton.style.width = " 200px";
+deleteButton.style.height = "40px";
+deleteButton.style.backgroundColor = "#ff5b6a";
+deleteButton.style.color = "white";
+deleteButton.style.borderRadius = "5px";
+deleteButton.style.display = "block";
+deleteButton.style.float = "right";
+deleteButton.style.marginRight = "20px";
+deleteButton.style.justifyContent = "bottom";
+deleteButton.style.fontSize = "20px";
+deleteButton.style.border = "none";
+
+deleteButton.addEventListener("click", () => {
+  dialogContent.innerHTML = "";
+  alert("Đã xóa thành công các sản phẩm trong đơn hàng !!!");
+  shoppingList = [];
+});
+
+dialogBox.appendChild(deleteButton);
 
 //chức năng build navbar
 function buildNavbar() {
@@ -743,7 +768,9 @@ function addToCart(burger) {
   alert(
     "Bạn vừa thêm thành công sản phẩm " + burger.name + " vào giỏ hàng hiện tại"
   );
-  dialogContent.appendChild(itemsToAdd);
+  dialogContent.appendChild(pic);
+  dialogContent.appendChild(itemCartName);
+  dialogContent.appendChild(itemCartPrice);
   console.log(shoppingList);
   payList.return;
 }
@@ -763,5 +790,6 @@ function tinhTien() {
     alert("Tổng tiền là: " + total);
     alert("Bạn đã thành công thanh toán đơn hàng");
     shoppingList = [];
+    dialogContent.innerHTML = "";
   }
 }
