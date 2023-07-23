@@ -1,7 +1,83 @@
 import data from "./list.json" assert { type: "json" };
 let container = document.getElementById("container");
+container.style = "width : 100%; height : 100%;";
 let body = document.body;
 
+
+let dialogBox = document.createElement("dialog");
+dialogBox.innerHTML = `GIỎ HÀNG (YOUR ODER LIST)`;
+function openDialog() {
+  dialogBox.setAttribute("open", "open");
+  dialogBox.show();
+  dialogBox.style.width = "500px";
+  dialogBox.style.height = "300px";
+  dialogBox.style.fontWeight = 400;
+  dialogBox.style.fontSize = "22px";
+  dialogBox.style.borderRadius = "10px";
+  dialogBox.style.position = "fixed";
+  dialogBox.style.top = "40%";
+  dialogBox.style.border = "3px solid #ff5b6a";
+  dialogBox.style.boxShadow = "rgba(0, 0, 0, 0.15) 1px 2px 5px 0px";
+  dialogBox.style.opacity = "1";
+  dialogBox.style.visibility = "visible";
+}
+
+function closeDialog() {
+  dialogBox.setAttribute("close", "close");
+  dialogBox.close();
+  dialogBox.style.width = "20px";
+  dialogBox.style.height = "10px";
+}
+let x = document.createElement("button");
+  x.style.width = "25px";
+  x.style.height = "25px";
+  x.style.borderRadius = "50px";
+  x.style.color = "black";
+  x.innerHTML = "X";
+  x.style.display = "block";
+  x.style.float = "right";
+  x.addEventListener("click", closeDialog);
+
+  dialogBox.appendChild(x);
+
+let payList = document.createElement("div");
+  payList.style.width = "auto";
+  payList.style.height = "auto";
+  payList.style.backgroundColor = "white";
+  payList.style.display = "grid";
+  payList.style.flexDirection = "row";
+  payList.style.lineBreak = "auto";
+  payList.style.alignItems = "center";
+  payList.style.columnGap = "3px";
+
+dialogBox.appendChild(payList);
+
+let chinhsua = document.createElement("div");
+  chinhsua.style.width = "97.1%";
+  chinhsua.style.height = "2px";
+  chinhsua.style.backgroundColor = "white";
+  chinhsua.style.justifyContent = "center";
+  chinhsua.style.columnGap = "10px";
+
+dialogBox.appendChild(chinhsua);
+
+let chargeButton = document.createElement("button");
+  chargeButton.innerHTML = "Thanh Toán";
+  chargeButton.style.width = " 100px";
+  chargeButton.style.height = "20px";
+  chargeButton.style.backgroundColor = "#ff5b6a";
+  chargeButton.style.color = "white";
+  chargeButton.style.borderRadius = "5px";
+  chargeButton.style.display = "block";
+  chargeButton.style.float = "right";
+  chargeButton.style.justifyContent = "bottom";
+  chargeButton.addEventListener("click", () => {
+    tinhTien();
+});
+
+chinhsua.appendChild(chargeButton);
+
+//chức năng build navbar
 function buildNavbar() {
   let navbar = document.createElement("div");
   navbar.style.boxSizing = "border-box";
@@ -177,8 +253,8 @@ function buildNavbar() {
   lowerCart.style.height = "45px";
   lowerCart.style.marginRight = "10px";
   lowerCart.style.paddingBottom = "6px";
-  
-  lowerCart.addEventListener("click", tinhTien);
+
+  lowerCart.addEventListener("click", openDialog);
 
   lowercontainerNav.appendChild(lowerCart);
 
@@ -195,6 +271,8 @@ bodyContent.style.flexDirection = "column";
 bodyContent.style.justifyContent = "center";
 bodyContent.style.alignItems = "center";
 bodyContent.style.marginTop = "50px";
+
+bodyContent.appendChild(dialogBox);
 
 let newMainContainer = buildMainContainer();
 
@@ -215,6 +293,8 @@ function buildMainContainer() {
 
   //build main frame for menu items
   let mainFrame = document.createElement("div");
+  mainFrame.style.boxSizing = "border-box";
+  mainFrame.style.display = "block";
   mainFrame.style.height = "100px";
   mainFrame.style.width = "100%";
   mainFrame.style.paddingTop = "40px";
@@ -246,7 +326,6 @@ function buildMainContainer() {
   swipeWrapper.style.height = "145px";
   swipeWrapper.style.position = "relative";
   swipeWrapper.style.width = "100%";
-  swipeWrapper.style.zIndex = "1";
   swipeWrapper.style.display = "flex";
   swipeWrapper.style.boxSizing = "content-box";
 
@@ -527,7 +606,7 @@ function buildMainContainer() {
   burgerBarImage.style.border = "3px solid red";
 
   burgerBar.appendChild(burgerBarImage);
-  
+
   let burgerBarText = document.createElement("span");
   burgerBarText.style.color = "#142f43";
   burgerBarText.style.display = "block";
@@ -629,6 +708,7 @@ for (let i = 0; i < data.Burgers.length; i++) {
 ContainerCard.appendChild(listCard);
 bodyContent.appendChild(ContainerCard);
 
+//Chức năng thêm vào giỏ hàng và tính toán tổng tiền trong giỏ hàng
 /** @type {Burger[]} */
 let shoppingList = [];
 
@@ -637,6 +717,15 @@ let shoppingList = [];
  * @param {Burger} burger
  */
 function addToCart(burger) {
+  let pic = document.createElement("img");
+  pic.src = burger.image;
+  pic.style.width = "40px";
+  pic.style.height = "40px";
+  let itemCartName = document.createElement("p");
+  itemCartName.innerHTML = item.name;
+  let itemCartPrice = document.createElement("p");
+  itemCartPrice.innerHTML = item.price;
+  
   let index = shoppingList.findIndex((item) => {
     return item.id == burger.id;
   });
@@ -648,33 +737,27 @@ function addToCart(burger) {
   }
   shoppingList.push({
     id: burger.id,
-    quantity: 1
+    quantity: 1,
   });
   alert("Bạn vừa thêm thành công sản phẩm " + burger.name);
   console.log(shoppingList);
-  return;
+  payList.return;
 }
 
-let chargeButton = document.createElement("button");
-chargeButton.innerHTML = "Thanh toán";
-chargeButton.addEventListener("click", () => {
-    tinhTien();
-})
-
-function tinhTien(){
-  if(shoppingList.length == 0){
-      alert("Chưa có món ăn nào trong giỏ hàng");
-  }
-  else{
-  let total = 0;
-  shoppingList.forEach((item) => {
+function tinhTien() {
+  if (shoppingList.length == 0) {
+    alert("Chưa có món ăn nào trong giỏ hàng");
+  } else {
+    let total = 0;
+    shoppingList.forEach((item) => {
       data.Burgers.forEach((food) => {
-          if(food.id == item.id){
-              total += food.price * item.quantity;
-          }
-      })
-  })
+        if (food.id == item.id) {
+          total += food.price * item.quantity;
+        }
+      });
+    });
+    alert("Bạn đã thành công thanh toán đơn hàng");
     alert("Tổng tiền là: " + total);
     shoppingList = [];
-  } 
+  }
 }
