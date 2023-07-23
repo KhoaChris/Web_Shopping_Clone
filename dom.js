@@ -3,13 +3,12 @@ let container = document.getElementById("container");
 container.style = "width : 100%; height : 100%;";
 let body = document.body;
 
-
 let dialogBox = document.createElement("dialog");
 dialogBox.innerHTML = `GIỎ HÀNG (YOUR ODER LIST)`;
 function openDialog() {
   dialogBox.setAttribute("open", "open");
   dialogBox.show();
-  dialogBox.style.width = "500px";
+  dialogBox.style.width = "700px";
   dialogBox.style.height = "300px";
   dialogBox.style.fontWeight = 400;
   dialogBox.style.fontSize = "22px";
@@ -18,6 +17,8 @@ function openDialog() {
   dialogBox.style.top = "40%";
   dialogBox.style.border = "3px solid #ff5b6a";
   dialogBox.style.boxShadow = "rgba(0, 0, 0, 0.15) 1px 2px 5px 0px";
+
+  container.blur = "auto";
 }
 
 function closeDialog() {
@@ -25,55 +26,58 @@ function closeDialog() {
   dialogBox.close();
   dialogBox.style.width = "20px";
   dialogBox.style.height = "10px";
+
 }
 let x = document.createElement("button");
-  x.style.width = "25px";
-  x.style.height = "25px";
-  x.style.borderRadius = "50px";
-  x.style.color = "black";
-  x.innerHTML = "X";
-  x.style.display = "block";
-  x.style.float = "right";
-  x.addEventListener("click", closeDialog);
+x.style.width = "25px";
+x.style.height = "25px";
+x.style.borderRadius = "50px";
+x.style.color = "black";
+x.innerHTML = "X";
+x.style.display = "block";
+x.style.float = "right";
+x.addEventListener("click", closeDialog);
 
-  dialogBox.appendChild(x);
+dialogBox.appendChild(x);
 
 let payList = document.createElement("div");
-  payList.style.width = "auto";
-  payList.style.height = "auto";
-  payList.style.backgroundColor = "white";
-  payList.style.display = "grid";
-  payList.style.flexDirection = "row";
-  payList.style.lineBreak = "auto";
-  payList.style.alignItems = "center";
-  payList.style.columnGap = "3px";
+payList.style.width = "auto";
+payList.style.height = "auto";
+payList.style.backgroundColor = "white";
+payList.style.display = "grid";
+payList.style.flexDirection = "row";
+payList.style.lineBreak = "auto";
+payList.style.alignItems = "center";
+payList.style.columnGap = "3px";
 
 dialogBox.appendChild(payList);
 
-let chinhsua = document.createElement("div");
-  chinhsua.style.width = "97.1%";
-  chinhsua.style.height = "2px";
-  chinhsua.style.backgroundColor = "white";
-  chinhsua.style.justifyContent = "center";
-  chinhsua.style.columnGap = "10px";
+let dialogContent = document.createElement("div");
+dialogContent.style.width = "97%";
+dialogContent.style.height = "230px";
+dialogContent.style.backgroundColor = "white";
+dialogContent.style.justifyContent = "left";
+dialogContent.style.columnGap = "10px";
+dialogContent.style.display = "flex";
 
-dialogBox.appendChild(chinhsua);
+dialogBox.appendChild(dialogContent);
 
 let chargeButton = document.createElement("button");
-  chargeButton.innerHTML = "Thanh Toán";
-  chargeButton.style.width = " 100px";
-  chargeButton.style.height = "20px";
-  chargeButton.style.backgroundColor = "#ff5b6a";
-  chargeButton.style.color = "white";
-  chargeButton.style.borderRadius = "5px";
-  chargeButton.style.display = "block";
-  chargeButton.style.float = "right";
-  chargeButton.style.justifyContent = "bottom";
-  chargeButton.addEventListener("click", () => {
-    tinhTien();
+chargeButton.innerHTML = "Thanh Toán";
+chargeButton.style.width = " 200px";
+chargeButton.style.height = "40px";
+chargeButton.style.backgroundColor = "#ff5b6a";
+chargeButton.style.color = "white";
+chargeButton.style.borderRadius = "5px";
+chargeButton.style.display = "block";
+chargeButton.style.float = "right";
+chargeButton.style.justifyContent = "bottom";
+chargeButton.style.fontSize = "20px";
+chargeButton.addEventListener("click", () => {
+  tinhTien();
 });
 
-chinhsua.appendChild(chargeButton);
+dialogBox.appendChild(chargeButton);
 
 //chức năng build navbar
 function buildNavbar() {
@@ -715,15 +719,15 @@ let shoppingList = [];
  * @param {Burger} burger
  */
 function addToCart(burger) {
-  // let pic = document.createElement("img");
-  // pic.src = burger.image;
-  // pic.style.width = "40px";
-  // pic.style.height = "40px";
-  // let itemCartName = document.createElement("p");
-  // itemCartName.innerHTML = item.name;
-  // let itemCartPrice = document.createElement("p");
-  // itemCartPrice.innerHTML = item.price;
-  
+    let pic = document.createElement("img");
+    pic.src = burger.image;
+    pic.style.width = "40px";
+    pic.style.height = "40px";
+    let itemCartName = document.createElement("p");
+    itemCartName.innerHTML = burger.name;
+    let itemCartPrice = document.createElement("p");
+    itemCartPrice.innerHTML = burger.price;
+
   let index = shoppingList.findIndex((item) => {
     return item.id == burger.id;
   });
@@ -736,10 +740,10 @@ function addToCart(burger) {
     id: burger.id,
     quantity: 1,
   });
-  alert("Bạn vừa thêm thành công sản phẩm " + burger.name + " vào giỏ hàng hiện tại");
-  // payList.appendChild(pic);
-  // payList.appendChild(itemCartName);
-  // payList.appendChild(itemCartPrice);
+  alert(
+    "Bạn vừa thêm thành công sản phẩm " + burger.name + " vào giỏ hàng hiện tại"
+  );
+  dialogContent.appendChild(itemsToAdd);
   console.log(shoppingList);
   payList.return;
 }
